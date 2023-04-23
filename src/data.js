@@ -1,5 +1,4 @@
 export const hues = [200, 320, 80, 160, 0, 240, 120, 280, 40];
-
 export const size = {
   default: 1,
   hover: 8
@@ -17,20 +16,20 @@ export const nodes = {
 };
 
 export const edges = [
-  { source: "1", target: "2", edgeWidth: 1, hue: 200 },
-  { source: "1", target: "3", edgeWidth: 1, hue: 200 },
+  { source: "1", target: "2", edgeWidth: 1, hue: 200, cost: 10},
+  { source: "1", target: "3", edgeWidth: 1, hue: 200, cost: 20},
 
-  { source: "2", target: "8", edgeWidth: 1, hue: 80 },
+  { source: "2", target: "8", edgeWidth: 1, hue: 80, cost: 20 },
 
-  { source: "3", target: "4", edgeWidth: 1, hue: 320 },
-  { source: "3", target: "5", edgeWidth: 1, hue: 320 },
-  { source: "3", target: "7", edgeWidth: 1, hue: 320 },
+  { source: "3", target: "4", edgeWidth: 1, hue: 320, cost: 20},
+  { source: "3", target: "5", edgeWidth: 1, hue: 320, cost: 20 },
+  { source: "3", target: "7", edgeWidth: 1, hue: 320, cost: 20},
 
-  { source: "2", target: "6", edgeWidth: 1, hue: 160 },
-  { source: "4", target: "7", edgeWidth: 1, hue: 160 },
-  { source: "4", target: "2", edgeWidth: 1, hue: 160 },
+  { source: "2", target: "6", edgeWidth: 1, hue: 160, cost: 20 },
+  { source: "4", target: "7", edgeWidth: 1, hue: 160, cost: 20 },
+  { source: "4", target: "2", edgeWidth: 1, hue: 160, cost: 20 },
 
-  { source: "5", target: "6", edgeWidth: 1, hue: 80 },
-  { source: "5", target: "7", edgeWidth: 1, hue: 80 },
-  { source: "8", target: "7", edgeWidth: 1, hue: 80 }
+  { source: "5", target: "6", edgeWidth: 1, hue: 80, cost: 20 },
+  { source: "5", target: "7", edgeWidth: 1, hue: 80, cost: 20 },
+  { source: "8", target: "7", edgeWidth: 1, hue: 80, cost: 20 }
 ];
