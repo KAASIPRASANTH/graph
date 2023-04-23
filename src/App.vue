@@ -10,7 +10,7 @@
         <circle
           v-bind="slotProps"
           :ref="nodeId"
-          :r="config.radius * scale"
+          :r="2*config.radius * scale"
           fill="gray"
           stroke="black"
           :stroke-width="size.default"
@@ -18,11 +18,10 @@
         <text
         x="0"
         y="0"
-        :font-size=20
-        :text-anchor="textAnchor"
-        :dominant-baseline="dominantBaseline"
+        :font-size="20 * scale"
+        :text-anchor="middle"
+        :dominant-baseline="central"
         :fill="white"
-        :transform="`translate(${x} ${y})`"
       >{{ nodeId }}</text>
         
       </template>

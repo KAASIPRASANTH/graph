@@ -1,6 +1,7 @@
 import * as vNG from "v-network-graph";
 import { ForceLayout } from "v-network-graph/lib/force-layout";
 
+
 export function configs() {
   return vNG.defineConfigs({
     view: {
@@ -20,6 +21,15 @@ export function configs() {
       hover: {
         width: 8,
         color: (edge) => `hsl(${edge.hue}, 50%, 50%`
+      }
+    },
+    path: {
+      visible: true,
+      normal: {
+        width: 10,
+        dasharray: "10 16",
+        animate: true,
+        animationSpeed: 40,
       }
     }
   });
