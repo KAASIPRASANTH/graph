@@ -26,7 +26,7 @@ export const edges = [
   { source: "3", target: "7", edgeWidth: 1, hue: 320, cost: 20},
 
   { source: "2", target: "6", edgeWidth: 1, hue: 160, cost: 20 },
-  { source: "4", target: "7", edgeWidth: 1, hue: 160, cost: 20 },
+  //{ source: "4", target: "7", edgeWidth: 1, hue: 160, cost: 20 },
   { source: "4", target: "2", edgeWidth: 1, hue: 160, cost: 20 },
 
   { source: "5", target: "6", edgeWidth: 1, hue: 80, cost: 20 },

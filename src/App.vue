@@ -7,6 +7,7 @@
       :event-handlers="eventHandlers"
     >
       <template #override-node="{ nodeId, scale, config, ...slotProps }">
+      
         <circle
           v-bind="slotProps"
           :ref="nodeId"
@@ -47,7 +48,7 @@
 
 <script>
 import { nodes, edges, size, hues } from "./data";
-import { configs } from "./configs";
+import {configs} from "./configs";
 
 export default {
   data: () => ({
@@ -57,7 +58,7 @@ export default {
     size,
     testCaseCondition: false,
   }),
-
+  
   computed: {
     configs,
     eventHandlers() {
@@ -86,9 +87,9 @@ export default {
       
      this.edges.forEach((edge) => {
         if (edge["source"] === node || edge["target"] === node) {
-          if (this.testCaseCondition) {
+          //if (this.testCaseCondition) {
             edge.edgeWidth = this.size[size];
-          }
+          //}
 
           const defaultColor = `hsl(${edge.hue}, 50%, 50%)`;
           this.$refs[edge.source].style.stroke = color ?? defaultColor;
