@@ -85,7 +85,7 @@ export default {
     handleHoverNode(node, size, color) {
       
      this.edges.forEach((edge) => {
-        //if (edge["source"] === node || edge["target"] === node) {
+        if (edge["source"] === node || edge["target"] === node) {
           if (this.testCaseCondition) {
             edge.edgeWidth = this.size[size];
           }
@@ -96,7 +96,7 @@ export default {
 
           this.$refs[edge.target].style.stroke = color ?? defaultColor;
           this.$refs[edge.target].style.strokeWidth = this.size[size];
-        //}
+        }
       });
     },
 
