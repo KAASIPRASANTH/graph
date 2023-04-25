@@ -39,9 +39,13 @@
       </template>
     </v-network-graph>
 
+    
     <label class="switch">
-      <input type="checkbox" v-model="testCaseCondition" />
-      <span>Toggle: On node hover change edge style</span>
+       Node:<input type="number" v-model="nodeVal" required>
+       Source:<input type="number" v-model="sourceVal" required>
+       Destination:<input type="number" v-model="destinationVal" required>
+       Cost:<input type="number" v-model="Cost" required>
+       <el-button @click="addNode"><b>Add</b></el-button>
     </label>
   </div>
 </template>
@@ -49,13 +53,19 @@
 <script>
 import { nodes, edges, size, hues } from "./data";
 import {configs} from "./configs";
-
+//import {ref} from "vue";
+//const nextNodeIndex = ref(Object.keys(nodes).length+1);
 export default {
   data: () => ({
     nodes,
     edges,
     hues,
     size,
+    nodeVal:0,
+    sourceVal:0,
+    destinationVal:0,
+    counter:11,
+    Cost:0,
     testCaseCondition: false,
   }),
   
@@ -83,22 +93,27 @@ export default {
   },
 
   methods: {
+    addNode(){
+      if(this.nodeVal) this.nodes[this.nodeVal] = {edgeWidth: 1, hue: 160 };
+      if(this.sourceVal && this.destinationVal){
+        let s = this.sourceVal.toString();
+        let d = this.destinationVal.toString();
+        this.edges[this.counter] = { source: s, target: d, edgeWidth: 1, hue: 80, cost: this.Cost };
+        this.counter++;
+      } 
+    },
     handleHoverNode(node, size, color) {
-      
-     this.edges.forEach((edge) => {
-        if (edge["source"] === node || edge["target"] === node) {
-          //if (this.testCaseCondition) {
-            edge.edgeWidth = this.size[size];
-          //}
+    for(let i=1;i<=1000;i++){
+      if(edges[i]!=null && (edges[i].source === node || edges[i].target === node)){
+        edges[i].edgeWidth = this.size[size];
+        const defaultColor = `hsl(${edges[i].hue}, 50%, 50%)`;
+          this.$refs[edges[i].source].style.stroke = color ?? defaultColor;
+          this.$refs[edges[i].source].style.strokeWidth = this.size[size];
 
-          const defaultColor = `hsl(${edge.hue}, 50%, 50%)`;
-          this.$refs[edge.source].style.stroke = color ?? defaultColor;
-          this.$refs[edge.source].style.strokeWidth = this.size[size];
-
-          this.$refs[edge.target].style.stroke = color ?? defaultColor;
-          this.$refs[edge.target].style.strokeWidth = this.size[size];
-        }
-      });
+          this.$refs[edges[i].target].style.stroke = color ?? defaultColor;
+          this.$refs[edges[i].target].style.strokeWidth = this.size[size];
+      }
+    }
     },
 
     handleHoverEdge(edge, size, color) {
@@ -142,9 +157,6 @@ body {
 }
 
 .switch input {
-  width: 20px;
-  height: 20px;
-  margin: 0 10px 0 0;
-  padding: 0;
+  background-color: #ffffff;
 }
 </style>

@@ -5,31 +5,32 @@ export const size = {
 };
 
 export const nodes = {
-  1: { name: "1", edgeWidth: 1, hue: 200 },
-  2: { name: "2", edgeWidth: 1, hue: 160 },
-  3: { name: "3", edgeWidth: 1, hue: 320 },
-  4: { name: "4", edgeWidth: 1, hue: 160 },
-  5: { name: "5", edgeWidth: 1, hue: 80 },
-  6: { name: "6", edgeWidth: 1, hue: 160 },
-  7: { name: "7", edgeWidth: 1, hue: 160 },
-  8: { name: "8", edgeWidth: 1, hue: 160 }
+  1: { edgeWidth: 1, hue: 200 },
+  2: { edgeWidth: 1, hue: 160 },
+  3: { edgeWidth: 1, hue: 320 },
+  4: { edgeWidth: 1, hue: 160 },
+  5: { edgeWidth: 1, hue: 80 },
+  6: { edgeWidth: 1, hue: 160 },
+  7: { edgeWidth: 1, hue: 160 },
+  8: { edgeWidth: 1, hue: 160 },
+ // 9: {name: "9", edgeWidth: 1, hue: 160 }
 };
 
-export const edges = [
-  { source: "1", target: "2", edgeWidth: 1, hue: 200, cost: 10},
-  { source: "1", target: "3", edgeWidth: 1, hue: 200, cost: 20},
+export const edges = {
+  1:{ source: "1", target: "2", edgeWidth: 1, hue: 200, cost: 10},
+  2:{ source: "1", target: "3", edgeWidth: 1, hue: 200, cost: 20},
 
-  { source: "2", target: "8", edgeWidth: 1, hue: 80, cost: 20 },
+  3:{ source: "2", target: "8", edgeWidth: 1, hue: 80, cost: 20 },
 
-  { source: "3", target: "4", edgeWidth: 1, hue: 320, cost: 20},
-  { source: "3", target: "5", edgeWidth: 1, hue: 320, cost: 20 },
-  { source: "3", target: "7", edgeWidth: 1, hue: 320, cost: 20},
+  4:{ source: "3", target: "4", edgeWidth: 1, hue: 320, cost: 20},
+  5:{ source: "3", target: "5", edgeWidth: 1, hue: 320, cost: 20 },
+  6:{ source: "3", target: "7", edgeWidth: 1, hue: 320, cost: 20},
 
-  { source: "2", target: "6", edgeWidth: 1, hue: 160, cost: 20 },
+  7:{ source: "2", target: "6", edgeWidth: 1, hue: 160, cost: 20 },
   //{ source: "4", target: "7", edgeWidth: 1, hue: 160, cost: 20 },
-  { source: "4", target: "2", edgeWidth: 1, hue: 160, cost: 20 },
+  8:{ source: "4", target: "2", edgeWidth: 1, hue: 160, cost: 20 },
 
-  { source: "5", target: "6", edgeWidth: 1, hue: 80, cost: 20 },
-  { source: "5", target: "7", edgeWidth: 1, hue: 80, cost: 20 },
-  { source: "8", target: "7", edgeWidth: 1, hue: 80, cost: 20 }
-];
+  9:{ source: "5", target: "6", edgeWidth: 1, hue: 80, cost: 20 },
+  10:{ source: "5", target: "7", edgeWidth: 1, hue: 80, cost: 20 },
+  11:{ source: "8", target: "7", edgeWidth: 1, hue: 80, cost: 20 }
+};
