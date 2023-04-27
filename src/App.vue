@@ -40,13 +40,13 @@
 
     
     <label class="switch">
-       Node:<input type="number" v-model="nodeVal" required>
-       Source:<input type="number" v-model="sourceVal" required>
-       Destination:<input type="number" v-model="destinationVal" required>
-       Cost:<input type="number" v-model="Cost" required>
-       <el-button @click="addNode"><b>Add</b></el-button>
-       <el-button @click="BFS"><b>BFS</b></el-button>
-       <el-button @click="DFS"><b>DFS</b></el-button>
+      &nbsp;&nbsp;Node:&nbsp;&nbsp;<input type="number" v-model="nodeVal" required>
+      &nbsp;&nbsp;&nbsp;&nbsp;Source:&nbsp;&nbsp;<input type="number" v-model="sourceVal" required>
+      &nbsp;&nbsp;&nbsp;&nbsp;Destination:&nbsp;&nbsp;<input type="number" v-model="destinationVal" required>
+      &nbsp;&nbsp;&nbsp;&nbsp;Cost:&nbsp;&nbsp;<input type="number" v-model="Cost" required>
+      <el-button @click="addNode"><b>&nbsp;&nbsp;Add&nbsp;&nbsp;</b></el-button>
+      <el-button @click="BFS"><b>BFS&nbsp;&nbsp;</b></el-button>
+      <el-button @click="DFS"><b>DFS</b></el-button>
     </label>
   </div>
 </template>
@@ -54,8 +54,7 @@
 <script>
 import { nodes, edges, size, hues } from "./data";
 import {configs} from "./configs";
-//import {ref} from "vue";
-//const nextNodeIndex = ref(Object.keys(nodes).length+1);
+
 export default {
   data: () => ({
     nodes,
