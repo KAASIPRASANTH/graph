@@ -40,13 +40,15 @@
 
     
     <label class="switch">
-      &nbsp;&nbsp;Node:&nbsp;&nbsp;<input type="number" v-model="nodeVal" required>
+      Node:&nbsp;&nbsp;<input type="number" v-model="nodeVal" required>
       &nbsp;&nbsp;&nbsp;&nbsp;Source:&nbsp;&nbsp;<input type="number" v-model="sourceVal" required>
       &nbsp;&nbsp;&nbsp;&nbsp;Destination:&nbsp;&nbsp;<input type="number" v-model="destinationVal" required>
       &nbsp;&nbsp;&nbsp;&nbsp;Cost:&nbsp;&nbsp;<input type="number" v-model="Cost" required>
-      <el-button @click="addNode"><b>&nbsp;&nbsp;Add&nbsp;&nbsp;</b></el-button>
-      <el-button @click="BFS"><b>BFS&nbsp;&nbsp;</b></el-button>
-      <el-button @click="DFS"><b>DFS</b></el-button>
+      &nbsp;&nbsp;<el-button @click="addNode"><b>&nbsp;&nbsp;Add&nbsp;&nbsp;</b></el-button>
+      &nbsp;&nbsp;<el-button @click="BFS"><b>BFS&nbsp;&nbsp;</b></el-button>
+      &nbsp;&nbsp;<el-button @click="DFS"><b>DFS&nbsp;&nbsp;</b></el-button>
+      &nbsp;&nbsp;<el-button @click="topo"><b>Topological Sort&nbsp;&nbsp;</b></el-button>
+      &nbsp;&nbsp;<el-button @click="Restart"><b>Reset&nbsp;&nbsp;</b></el-button>
     </label>
   </div>
 </template>
@@ -64,10 +66,11 @@ export default {
     nodeVal:0,
     sourceVal:0,
     destinationVal:0,
-    counter:11,
+    counter:20,
     Cost:0,
     curr:1,
     edgeCount:0,
+    topoCount:1,
     testCaseCondition: false,
   }),
   
@@ -142,9 +145,14 @@ export default {
         }
         flag++;
       }
-
       
-      for(let f=1;f<=10;f++){
+      for(let i=1;i<=1000;i++){
+        if(this.nodes[i] != null && !visited[i]){
+          r[flag].push(i);
+          flag++;
+        }
+      }
+      for(let f=1;f<=1000;f++){
         var l = r[f];
         if(f == this.curr){
           for(var v in l){
@@ -153,8 +161,8 @@ export default {
           }
         }
       }
-      
       this.curr++;
+      console.log(r);
     },
     doDFS(curr,adj,visited,res){
       visited[curr] = true;
@@ -169,7 +177,6 @@ export default {
     },
     DFS(){
       this.curr=1;
-      console.log("started");
       let vertices = [];
       let adj = {};
       for(let v=1;v<=1000;v++){
@@ -201,7 +208,107 @@ export default {
       }
       this.edgeCount++;
     },
+    topo(){
+      console.log("started");
+      let vertices = [];
+      let adj = {};
+      let inDeg = new Array(1000);
+      for(let v=1;v<=1000;v++){
+        inDeg[v] = 0;
+        if(nodes[v]!=null){
+          vertices.push(v);
+          adj[v] = [];
+        }
+      }
+      for(let i=1;i<=1000;i++){
+        if(edges[i]!=null){
+          let s=parseInt(edges[i].source);
+          let d=parseInt(edges[i].target);
+          inDeg[d]++;
+          adj[s].push(d);
+        }
+      }
+      for(let i=1;i<=8;i++){
+        console.log(i+" "+inDeg[i]+"\n");
+      }
+      let q = [];
+      for(let i=0;i<=1000;i++){
+        if(this.nodes[i] && inDeg[i] == 0){
+          q.push(i);
+        }
+      }
+
+      let flag=1;
+      let r = {};
+      for(let i=1;i<=1000;i++){
+        r[i] = [];
+      }
+      while(q.length!=0){
+        let len = q.length;
+        while(len-->0){
+          let u = q.shift();
+          r[flag].push(u);
+          let l = adj[u];
+          for(var v in l){
+            let curr = l[v];
+            if(--inDeg[curr] == 0){
+              q.push(curr);
+            } 
+          }
+        }
+        flag++;
+      }
+      let temp = 0;
+      let list = ["","red","green","blue","yellow","pink","brown","orange"];
+      for(let i=1;i<=1000;i++){
+        if(i == this.topoCount){
+          let l = r[i];
+          for(let pos in l){
+            let source = l[pos];
+            for(let index in list){
+              let color = list[index];
+              if(this.topoCount == index) this.$refs[source+""].style.stroke = color;
+            }
+            for(let k=1;k<=1000;k++){
+              if(edges[k]!=null){
+                let s=parseInt(edges[k].source);
+                if(s == source){
+                  edges[k].hue = `hsl(${120}, 50%, 50%)`;
+                }
+              }
+            }
+            temp=1;
+            this.$refs[source+""].style.strokeWidth = this.size["hover"];
+          }
+        }
+      }
+      this.topoCount++;
+      if(temp == 0){
+        this.topoCount = 1;
+      }
+    },
+    Restart(){
+      for(let i=1;i<=1000;){
+        if(this.edges[i]!=null){
+          this.edges[i].hue = 170;
+        }
+        if(this.edges[i+1]!=null){
+          this.edges[i+1].hue = 320;
+        }
+        if(this.edges[i+2]!=null){
+          this.edges[i+2].hue = 80;
+        }
+        if(this.edges[i+3]!=null){
+          this.edges[i+3].hue = 290;
+        }
+        i+=4;
+      }
+      this.topoCount=1;
+      this.curr=1;
+      this.edgeCount=0;
+    },
     addNode(){
+      this.topoCount=1;
       this.edgeCount=0;
       this.curr=1;
       if(this.nodeVal) this.nodes[this.nodeVal] = {edgeWidth: 1, hue: 160 };
@@ -213,6 +320,8 @@ export default {
       } 
     },
     handleHoverNode(node, size, color) {
+      if(this.topoCount==1){
+      this.topoCount=1;
       this.curr=1;
       this.edgeCount=0;
     for(let i=1;i<=1000;i++){
@@ -226,10 +335,14 @@ export default {
           this.$refs[edges[i].target].style.strokeWidth = this.size[size];
       }
       console.log(color);
+      console.log(edges);
+    }
     }
     },
 
     handleHoverEdge(edge, size, color) {
+      if(this.topoCount==1){
+      this.topoCount=1;
       this.curr = 1;
       this.edgeCount=0;
       const { source, target, hue } = this.edges[edge];
@@ -240,6 +353,7 @@ export default {
 
       this.$refs[source].style.stroke = color ?? defaultColor;
       this.$refs[target].style.stroke = color ?? defaultColor;
+    }
     },
   },
 };
@@ -250,7 +364,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: sans-serif;  
   background-color:black;
 }
 
@@ -273,5 +387,8 @@ body {
 
 .switch input {
   background-color: #ffffff;
+}
+el-button:hover{
+  -webkit-transform: scale(1.2);
 }
 </style>

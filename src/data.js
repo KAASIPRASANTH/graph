@@ -33,5 +33,5 @@ export const edges = {
 
   10:{ source: "6", target: "8", edgeWidth: 1, hue: 80, cost: 20 },
 
-  11:{ source: "7", target: "8", edgeWidth: 1, hue: 200, cost: 20 }
+  11:{ source: "7", target: "8", edgeWidth: 1, hue: 360, cost: 20 }
 };

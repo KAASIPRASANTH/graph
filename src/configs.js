@@ -8,28 +8,46 @@ export function configs() {
     },
 
     node: {
-      label: { visible: true }
+      selectable:true,
+      label: {  direction: "center",visible: true }
     },
 
     edge: {
+      selectable:true,
       normal: {
-        width: ({ edgeWidth }) => edgeWidth,
-        color: (edge) => `hsl(${edge.hue}, 50%, 50%`
+        width: 5,
+        linecap:"butt",
+        animate:true,
+        animationSpeed:30,
+        dasharray:8,
+        color:(edge)=>`hsl(${edge.hue},50%,50%`
       },
-
+      margin: 2,
+      gap:5,
+      type:"straight",
+      marker: {
+        source:{
+          type: "none",
+          width: 4,
+          height: 4,
+          color:null,
+          margin:1,
+          units:"strokeWidth",
+        },
+        target: {
+          type: "arrow",
+          width: 4,
+          height: 4,
+          color:null,
+          margin:1,
+          units:12,
+        },
+      },
       hover: {
         width: 8,
         color: (edge) => `hsl(${edge.hue}, 50%, 50%`
       }
     },
-    path: {
-      visible: true,
-      normal: {
-        width: 10,
-        dasharray: "10 16",
-        animate: true,
-        animationSpeed: 40,
-      }
-    }
+    
   });
 }
